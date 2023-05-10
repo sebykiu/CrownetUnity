@@ -16,7 +16,7 @@ namespace Objects.Person
 
         private void Update()
         {
-            var velocity = Vector3.forward * (Input.GetAxis("Vertical") * 2.0f);
+            var velocity = Vector3.forward * 2.0f;
             transform.Translate(velocity * Time.deltaTime);
             _animator.SetFloat(Speed, velocity.magnitude);
         }
