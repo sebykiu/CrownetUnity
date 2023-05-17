@@ -33,7 +33,7 @@ namespace Network
         private void OnDestroy()
         {
             _serverSocket.Dispose();
-            _receiveThread.Interrupt();
+            _receiveThread.Suspend();
         }
 
         private async void AcceptClientAsync()

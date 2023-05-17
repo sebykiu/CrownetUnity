@@ -1,8 +1,9 @@
+using System;
 using Newtonsoft.Json;
 
 namespace Network.Json
 {
-    public class JsonDeserializer
+    public static class JsonDeserializer
     {
         public static Message Deserialize(string json)
         {
@@ -10,6 +11,7 @@ namespace Network.Json
         }
     }
 
+    [Serializable]
     public  class Message
     {
         public string Id { get; set; }
@@ -18,6 +20,7 @@ namespace Network.Json
 
     }
 
+    [Serializable]
     public  class Coordinates
     {
         public double x { get; set; }

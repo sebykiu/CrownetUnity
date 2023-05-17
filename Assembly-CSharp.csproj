@@ -43,12 +43,13 @@
   <ItemGroup>
      <Compile Include="Assets/Network/Json/Deserializer.cs" />
      <Compile Include="Assets/Scripts/PlayerMovement.cs" />
-     <Compile Include="Assets/FreeFlyCamera/Scripts/FreeFlyCamera.cs" />
      <Compile Include="Assets/Scripts/PersonSpawner.cs" />
      <Compile Include="Assets/Network/NetworkController.cs" />
      <Compile Include="Assets/Objects/Person/MovementScript.cs" />
      <Compile Include="Assets/FreeFlyCamera/Demo/Scripts/ToggleGameObjectEnable.cs" />
+     <Compile Include="Assets/FreeFlyCamera/Scripts/FreeFlyCamera.cs" />
      <Folder Include="Assets" />
+     <Folder Include="Assets/FreeFlyCamera" />
      <Folder Include="Assets/Objects" />
      <Folder Include="Assets/Objects/Vehicle" />
      <Folder Include="Assets/Objects/Person" />
@@ -60,7 +61,6 @@
      <Folder Include="Assets/FreeFlyCamera/Documentation" />
      <None Include="Assets/FreeFlyCamera/readme.txt" />
      <Folder Include="Assets/Network/Json" />
-     <Folder Include="Assets/FreeFlyCamera" />
      <Folder Include="Assets/Scenes" />
      <Folder Include="Assets/FreeFlyCamera/Scripts" />
      <Folder Include="Assets/FreeFlyCamera/Demo/Materials" />

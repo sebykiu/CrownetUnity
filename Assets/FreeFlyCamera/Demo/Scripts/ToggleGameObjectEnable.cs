@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ToggleGameObjectEnable : MonoBehaviour
 {
-    [FormerlySerializedAs("_go")] [SerializeField]
-    private GameObject go;
+    [SerializeField]
+    private GameObject _go;
 
     private bool _enabled = true;
 
@@ -13,7 +12,7 @@ public class ToggleGameObjectEnable : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             _enabled = !_enabled;
-            go.SetActive(_enabled);
+            _go.SetActive(_enabled);
         }
     }
 }
