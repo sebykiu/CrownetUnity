@@ -4,19 +4,19 @@ public class CharacterSpawner : MonoBehaviour
 {
     public GameObject characterPrefab; // Reference to the character prefab in your Assets folder
 
-    private float spawnTimer = 0f; // Timer to track when to spawn the character
-    private float spawnInterval = 10f; // Time interval between character spawns
+    private float _spawnTimer = 0f; // Timer to track when to spawn the character
+    private float _spawnInterval = 10f; // Time interval between character spawns
 
     private void Update()
     {
         // Increment the spawn timer based on Time.deltaTime
-        spawnTimer += Time.deltaTime;
+        _spawnTimer += Time.deltaTime;
 
         // Check if the spawn timer exceeds the spawn interval
-        if (spawnTimer >= spawnInterval)
+        if (_spawnTimer >= _spawnInterval)
         {
             SpawnCharacter();
-            spawnTimer = 0f; // Reset the spawn timer
+            _spawnTimer = 0f; // Reset the spawn timer
         }
     }
 

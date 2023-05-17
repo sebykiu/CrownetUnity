@@ -41,87 +41,29 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets/FreeFlyCamera/Scripts/FreeFlyCamera.cs" />
-     <Compile Include="Assets/NetworkController.cs" />
-     <Compile Include="Assets/FreeCameraController.cs" />
-     <Compile Include="Assets/FreeFlyCamera/Demo/Scripts/ToggleGameObjectEnable.cs" />
-     <Compile Include="Assets/Scripts/PersonSpawner.cs" />
+     <Compile Include="Assets/Network/Json/Deserializer.cs" />
      <Compile Include="Assets/Scripts/PlayerMovement.cs" />
+     <Compile Include="Assets/FreeFlyCamera/Scripts/FreeFlyCamera.cs" />
+     <Compile Include="Assets/Scripts/PersonSpawner.cs" />
+     <Compile Include="Assets/Network/NetworkController.cs" />
      <Compile Include="Assets/Objects/Person/MovementScript.cs" />
+     <Compile Include="Assets/FreeFlyCamera/Demo/Scripts/ToggleGameObjectEnable.cs" />
      <Folder Include="Assets" />
-     <Folder Include="Assets/Blink/Art/Animations/Animations_Starter_Pack" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader" />
-     <Folder Include="Assets/TextMesh Pro/Sprites" />
-     <Folder Include="Assets/Easy Primitive People/Materials" />
-     <Folder Include="Assets/TextMesh Pro/Resources/Sprite Assets" />
      <Folder Include="Assets/Objects" />
      <Folder Include="Assets/Objects/Vehicle" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader" />
      <Folder Include="Assets/Objects/Person" />
-     <Folder Include="Assets/Course Library/_Source_Files" />
-     <None Include="Assets/Course Library/_Source_Files/_LICENSE.txt" />
-     <Folder Include="Assets/Network/js" />
-     <Folder Include="Assets/Blink/Art/Animations/Animations_Starter_Pack/Gathering" />
      <Folder Include="Assets/Network" />
-     <Folder Include="Assets/TextMesh Pro/Resources/Fonts &amp; Materials" />
-     <None Include="Assets/Network/js/package-lock.json" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc" />
      <Folder Include="Assets/FreeFlyCamera/Demo/Scenes" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader" />
-     <Folder Include="Assets/TextMesh Pro/Resources" />
-     <Folder Include="Assets/Course Library/Ground" />
-     <Folder Include="Assets/Network/js/node_modules/ws/lib" />
-     <Folder Include="Assets/Blink/Art/Animations/Animations_Starter_Pack/Combat" />
-     <Folder Include="Assets/Course Library/_Source_Files/FBX" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader" />
-     <Folder Include="Assets/Blink/Art" />
-     <Folder Include="Assets/TextMesh Pro" />
-     <None Include="Assets/Network/js/node_modules/ws/package.json" />
      <Folder Include="Assets/Scripts" />
      <Folder Include="Assets/FreeFlyCamera/Demo" />
-     <Folder Include="Assets/Blink/Art/Animations/Animations_Starter_Pack/Movement" />
      <Folder Include="Assets/FreeFlyCamera/Demo/Scripts" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader" />
      <Folder Include="Assets/FreeFlyCamera/Documentation" />
-     <Folder Include="Assets/Easy Primitive People/Prefab" />
-     <None Include="Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt" />
      <None Include="Assets/FreeFlyCamera/readme.txt" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF.shader" />
-     <Folder Include="Assets/Course Library/Obstacles" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader" />
-     <None Include="Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt" />
-     <Folder Include="Assets/Course Library/Vehicles" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc" />
-     <Folder Include="Assets/Blink" />
-     <Folder Include="Assets/Course Library/_Source_Files/Misc" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc" />
-     <Folder Include="Assets/TextMesh Pro/Shaders" />
-     <Folder Include="Assets/TextMesh Pro/Resources/Style Sheets" />
-     <Folder Include="Assets/TextMesh Pro/Fonts" />
-     <Folder Include="Assets/Blink/Art/Animations" />
-     <Folder Include="Assets/Course Library/_Source_Files/Materials" />
-     <None Include="Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt" />
-     <Folder Include="Assets/Easy Primitive People" />
-     <Folder Include="Assets/Course Library/Sky" />
-     <Folder Include="Assets/Course Library" />
-     <Folder Include="Assets/Network/js/node_modules" />
+     <Folder Include="Assets/Network/Json" />
      <Folder Include="Assets/FreeFlyCamera" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader" />
-     <None Include="Assets/Network/js/package.json" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader" />
      <Folder Include="Assets/Scenes" />
-     <None Include="Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt" />
-     <Folder Include="Assets/TextMesh Pro/Documentation" />
-     <Folder Include="Assets/Course Library/_Source_Files/Textures" />
      <Folder Include="Assets/FreeFlyCamera/Scripts" />
-     <Folder Include="Assets/Network/js/node_modules/ws" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader" />
      <Folder Include="Assets/FreeFlyCamera/Demo/Materials" />
-     <None Include="Assets/TextMesh Pro/Sprites/EmojiOne.json" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_Sprite.shader" />
      <Reference Include="UnityEngine">
      <HintPath>/Applications/Unity/Hub/Editor/2021.3.20f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
      </Reference>
@@ -373,6 +315,9 @@
      </Reference>
      <Reference Include="ReportGeneratorMerged">
      <HintPath>/Users/skiunke/CrownetUnity/Library/PackageCache/com.unity.testtools.codecoverage@1.2.2/lib/ReportGenerator/ReportGeneratorMerged.dll</HintPath>
+     </Reference>
+     <Reference Include="Newtonsoft.Json">
+     <HintPath>/Users/skiunke/CrownetUnity/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/Newtonsoft.Json.dll</HintPath>
      </Reference>
      <Reference Include="netstandard">
      <HintPath>/Applications/Unity/Hub/Editor/2021.3.20f1/Unity.app/Contents/NetStandard/ref/2.1.0/netstandard.dll</HintPath>
