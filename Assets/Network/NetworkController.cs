@@ -17,6 +17,7 @@ namespace Network
         private static Socket _serverSocket;
         private static Socket _clientSocket;
         private Thread _receiveThread;
+        private bool _isRunning = true;
 
         private void Start()
         {
@@ -32,10 +33,13 @@ namespace Network
 
         private void OnDestroy()
         {
-            _serverSocket.Dispose();
-            _receiveThread.Suspend();
+            _isRunning = false; // Set the flag to exit the receive thread
+            _receiveThread.Join(); // Wait for the receive thread to exit
+            _clientSocket.Close(); // Close the client socket
+            _serverSocket.Close(); // Close the server socket
         }
 
+        
         private async void AcceptClientAsync()
         {
             try
@@ -58,12 +62,12 @@ namespace Network
             }
         }
 
-        private static void ReceiveData()
+        private void ReceiveData()
         {
             Debug.Log("A new Thread was created!");
 
             {
-                while (true)
+                while (_isRunning)
                 {
                     int bytesRead = _clientSocket.Receive(Buffer);
                     Debug.Log("Message Size received: " + bytesRead);
