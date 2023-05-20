@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Network.Json;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Network
@@ -17,7 +17,6 @@ namespace Network
         private static Socket _serverSocket;
         private static Socket _clientSocket;
         private Thread _receiveThread;
-        private bool _isRunning = true;
 
         private void Start()
         {
@@ -33,7 +32,7 @@ namespace Network
 
         private void OnDestroy()
         {
-            _isRunning = false; // Set the flag to exit the receive thread
+           
             _receiveThread.Join(); // Wait for the receive thread to exit
             _clientSocket.Close(); // Close the client socket
             _serverSocket.Close(); // Close the server socket
@@ -67,27 +66,54 @@ namespace Network
             Debug.Log("A new Thread was created!");
 
             {
-                while (_isRunning)
+                while (true)
                 {
-                    int bytesRead = _clientSocket.Receive(Buffer);
-                    Debug.Log("Message Size received: " + bytesRead);
 
+                    var lengthBuffer = new byte[4];
+                    _clientSocket.Receive(lengthBuffer, SocketFlags.None);
 
-                    var message = Encoding.ASCII.GetString(Buffer, 0, bytesRead);
-
-                    Debug.Log(message);
-                    if (message.Contains("<|EOM|>"))
+                    if (BitConverter.IsLittleEndian)
                     {
-                        // Extract the portion of the message before the delimiter
-                        int endIndex = message.IndexOf("<|EOM|>", StringComparison.Ordinal);
-                        string finalMessage = message.Substring(0, endIndex);
-                        var deserialize = JsonDeserializer.Deserialize(finalMessage);
-                        Debug.Log("[Deserialize]" + deserialize.Coordinates.x);
-                        // Clear the buffer and reset the memory stream
-                        Array.Clear(Buffer, 0, Buffer.Length);
+                        Array.Reverse(lengthBuffer);
                     }
+
+                    int messageLength = BitConverter.ToInt32(lengthBuffer, 0);
+
+                    if (messageLength == 0)
+                    {
+                        Debug.Log("Received empty message. Client is disconnected!");
+                        break;
+                    }
+
+
+                    var messageBuffer = new byte[messageLength];
+                    var received = _clientSocket.Receive(messageBuffer, SocketFlags.None);
+
+                    var response = Encoding.UTF8.GetString(messageBuffer, 0, received);
+
+                    Message message = JsonConvert.DeserializeObject<Message>(response);
+                    Debug.Log(message.Id);
+                    
+                    
                 }
             }
         }
     }
+}
+
+public class Message
+{
+    public string Id { get; set; }
+    public string Instruction { get; set; }
+    public Coordinates Coordinates { get; set; }
+
+
+}
+
+public class Coordinates
+{
+    public double X { get; set; }
+    public double Y { get; set; }
+    public double Z { get; set; }
+    
 }
