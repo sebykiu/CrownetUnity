@@ -18,25 +18,27 @@ namespace Objects.Person
 
         private void Update()
         {
-            if (!(_timer < WalkDuration))
-            {
-                if (_timer < IdleDuration)
-                {
-                    _animator.SetFloat(Speed, 0.001f);
-                    _timer += Time.deltaTime;
-                }
-                else
-                {
-                    _timer = 0;
-                }
-            }
-            else
-            {
-                var velocity = Vector3.forward * 2.0f;
-                transform.Translate(velocity * Time.deltaTime);
-                _animator.SetFloat(Speed, velocity.magnitude);
-                _timer += Time.deltaTime;
-            }
+            Debug.Log("[MovementScript - Update]");
+
+            // if (!(_timer < WalkDuration))
+            // {
+            //     if (_timer < IdleDuration)
+            //     {
+            //         _animator.SetFloat(Speed, 0.001f);
+            //         _timer += Time.deltaTime;
+            //     }
+            //     else
+            //     {
+            //         _timer = 0;
+            //     }
+            // }
+            // else
+            // {
+            //     var velocity = Vector3.forward * 2.0f;
+            //     transform.Translate(velocity * Time.deltaTime);
+            //     _animator.SetFloat(Speed, velocity.magnitude);
+            //     _timer += Time.deltaTime;
+            // }
         }
     }
 }
