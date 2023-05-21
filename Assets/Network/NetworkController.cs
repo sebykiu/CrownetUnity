@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
+using Mobility;
 
 namespace Network
 {
@@ -17,6 +18,7 @@ namespace Network
         private static Socket _serverSocket;
         private static Socket _clientSocket;
         private Thread _receiveThread;
+        private MobilityBase  _mobilityBase = new();
 
         private void Start()
         {
@@ -91,10 +93,10 @@ namespace Network
 
                     var response = Encoding.UTF8.GetString(messageBuffer, 0, received);
 
-                    Message message = JsonConvert.DeserializeObject<Message>(response);
-                    Debug.Log(message.Id);
-                    
-                    
+                    var message = JsonConvert.DeserializeObject<Message>(response);
+                    _mobilityBase.ProcessNetworkRequest(message);
+
+
                 }
             }
         }

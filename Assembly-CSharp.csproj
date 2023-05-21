@@ -47,6 +47,10 @@
      <Compile Include="Assets/Network/NetworkController.cs" />
      <Compile Include="Assets/Objects/Person/MovementScript.cs" />
      <Compile Include="Assets/FreeFlyCamera/Demo/Scripts/ToggleGameObjectEnable.cs" />
+     <Compile Include="Assets/Mobility/PersonMobility.cs" />
+     <Compile Include="Assets\Mobility\MobilityBase.cs" />
+     <Compile Include="Assets\Mobility\StationaryMobility.cs" />
+     <Compile Include="Assets\Mobility\VehicleMobility.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets/FreeFlyCamera" />
      <Folder Include="Assets/Objects" />
