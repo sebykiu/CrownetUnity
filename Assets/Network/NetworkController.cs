@@ -18,7 +18,7 @@ namespace Network
         //public  MobilityManager mobilityManager;
 
         private ConcurrentQueue<Action> _mainThreadWorkQueue = new ConcurrentQueue<Action>();
-        private const int Port = 12345;
+        private const int Port = 54321;
         private static readonly IPAddress IPAddress = IPAddress.Any;
         private static readonly byte[] Buffer = new byte[1024];
         private static Socket _serverSocket;
