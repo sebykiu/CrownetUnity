@@ -1036,14 +1036,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1200350263}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.286}
+  m_LocalRotation: {x: -0.00012429345, y: -0.0121982815, z: -0.008582527, w: -0.99988884}
+  m_LocalPosition: {x: 4.1, y: 2.2199998, z: 4.3}
   m_LocalScale: {x: 1, y: 0.5, z: 0.98558}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.002, y: 361.398, z: 0.984}
 --- !u!114 &1200350267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1099,7 +1099,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392a020562a86467386f460d60012567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  personPrefab: {fileID: 5542016297965134966, guid: e0ba8fc0f079a430cb7b1b99f2a51027, type: 3}
 --- !u!4 &1317322376
 Transform:
   m_ObjectHideFlags: 0
@@ -1599,4 +1598,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1915124438
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1915124440}
+  - component: {fileID: 1915124439}
+  m_Layer: 0
+  m_Name: EntityManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1915124439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915124438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7bade1bce84cc38f659a40d6a0d833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  personPrefab: {fileID: 5542016297965134966, guid: e0ba8fc0f079a430cb7b1b99f2a51027, type: 3}
+  vehiclePrefab: {fileID: 193646, guid: 19c00265a4f7b43489bdceefa77c2092, type: 3}
+  stationaryPrefab: {fileID: 919132149155446097, guid: 4cdfaa5a0cb1ff4f3974e151135e7f7a, type: 3}
+--- !u!4 &1915124440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915124438}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.8512809, y: -102.65295, z: -67.24744}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

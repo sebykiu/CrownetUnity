@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
-using Mobility;
 
 namespace Network
 {
@@ -25,9 +24,8 @@ namespace Network
         private static Socket _clientSocket;
         private Thread _receiveThread;
         private bool _isRunning = true;
-
-        private Dictionary<string, GameObject> _personObjects = new Dictionary<string, GameObject>();
-        public GameObject personPrefab;
+        public event Action<Message> OnMessageReceived;
+        private float mainThreadTime;
 
 
         private void Start()
@@ -51,6 +49,7 @@ namespace Network
 
         private void FixedUpdate()
         {
+            mainThreadTime = Time.time;
             while (!_mainThreadWorkQueue.IsEmpty && _isRunning && _clientSocket != null && _clientSocket.Connected)
             {
                 if (_mainThreadWorkQueue.TryDequeue(out Action action))
@@ -67,8 +66,8 @@ namespace Network
                 _isRunning = false;
                 if (_clientSocket != null)
                 {
-                    _receiveThread.Join(); 
-                    _clientSocket.Close(); 
+                    _receiveThread.Join();
+                    _clientSocket.Close();
                 }
 
                 _serverSocket?.Close();
@@ -136,15 +135,9 @@ namespace Network
                     var response = Encoding.UTF8.GetString(messageBuffer, 0, received);
 
                     var message = JsonConvert.DeserializeObject<Message>(response);
+                    message.SimulationTime = mainThreadTime;
 
-
-                    _mainThreadWorkQueue.Enqueue(() =>
-                    {
-                        if (message.Instruction == "createOrUpdatePerson")
-                        {
-                            CreateOrUpdatePerson(message);
-                        }
-                    });
+                    _mainThreadWorkQueue.Enqueue(() => { OnMessageReceived?.Invoke(message); });
                 }
             }
             catch (SocketException ex)
@@ -160,46 +153,24 @@ namespace Network
                 Debug.Log("Thread closed");
             }
         }
-        
-        private void CreateOrUpdatePerson(Message message)
-        {
-            Debug.Log("CreateOrUpdatePersonCalled");
-            var id = message.Id;
-            if (_personObjects.TryGetValue(id, out var o))
-            {
-                Debug.Log("Person already exists");
-
-                o.transform.position = new Vector3(
-                    (float)message.Coordinates.X,
-                    1.00f,
-                    (float)message.Coordinates.Y);
-            }
-            else
-            {
-                Debug.Log("Person doesn't exist already. Instantiating");
-
-                var newPerson = Instantiate(personPrefab);
-                 newPerson.transform.position = new Vector3(
-                    (float)message.Coordinates.X,
-                    1.00f,
-                    (float) message.Coordinates.Y);
-                _personObjects.Add(id, newPerson);
-            }
-
-        }
     }
+}
 
-    public class Message
-    {
-        public string Id { get; set; }
-        public string Instruction { get; set; }
-        public Coordinates Coordinates { get; set; }
-    }
 
-    public class Coordinates
-    {
-        public double X { get; set; }
-        public double Y { get; set; }
-        public double Z { get; set; }
-    }
+public class Message
+{
+    public string SourceId { get; set; }
+    public string TargetId { get; set; }
+
+    public Coordinates Coordinates { get; set; }
+    public string ObjectType { get; set; }
+    
+    public float SimulationTime { get; set; }
+}
+
+public class Coordinates
+{
+    public double X { get; set; }
+    public double Y { get; set; }
+    public double Z { get; set; }
 }
