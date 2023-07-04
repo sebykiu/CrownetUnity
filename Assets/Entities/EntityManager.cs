@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Entities;
 using Network;
 using UnityEngine;
@@ -12,6 +14,7 @@ namespace DefaultNamespace
         public GameObject personPrefab;
         public GameObject vehiclePrefab;
         public GameObject stationaryPrefab;
+        public LineRenderer lineRendererPrefab;
         private Dictionary<string, MovementScript> _entities = new Dictionary<string, MovementScript>();
 
         private NetworkController _networkController;
@@ -45,23 +48,65 @@ namespace DefaultNamespace
                 Debug.LogError("Target entity not found!");
             }
 
-            GameObject lineObject = new GameObject("PacketLine");
-            LineRenderer lineRenderer = lineObject.AddComponent<LineRenderer>();
-            lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+
+            
+            LineRenderer lineRenderer = Instantiate(lineRendererPrefab);
             lineRenderer.positionCount = 2;
-            lineRenderer.startWidth = 0.01f;
-            lineRenderer.startColor = Color.blue;
-            lineRenderer.endColor =  new Color(0.5f, 0f, 0.5f, 1f);
-            lineRenderer.endWidth = 0.5f;
+            lineRenderer.endWidth = 0.01f;
+            lineRenderer.startWidth = 0.5f;
+            lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
             Vector3 sourcePos = src.transform.position;
-            sourcePos.y += 1; // Replace '1' with the height of the model if you know it
+            Vector3 targetPos = tar.transform.position;
+            
+            if (_entities.Keys.First() == message.SourceId)
+            {
+                
+                sourcePos.y += 10; 
+                
+            }
+            if (_entities.Keys.First() == message.TargetId)
+            {
+                
+                targetPos.y += 10; 
+                
+            }
+            
+            
+          
             lineRenderer.SetPosition(0, sourcePos);
 
-            Vector3 targetPos = tar.transform.position;
-            targetPos.y += 1; // Replace '1' with the height of the model if you know it
-            lineRenderer.SetPosition(1, targetPos);
+            Color purple = new Color(0.5f, 0f, 0.5f, 1f); // RGBA values
+            lineRenderer.startColor = Color.blue;
+            lineRenderer.endColor = purple;
+            
+            
+            // Start a coroutine that makes the arrow grow from start to end
+            StartCoroutine(GrowArrow(lineRenderer, sourcePos, targetPos, 0.5f));
+
+            // Set the color to purple
 
 
+            // Destroy the instantiated LineRenderer GameObject after 3 seconds
+            Destroy(lineRenderer.gameObject, 0.75f);
+
+
+        }
+
+        IEnumerator GrowArrow(LineRenderer lineRenderer, Vector3 start, Vector3 end, float duration)
+        {
+
+            float progress = 0;
+            while (progress < 1)
+            {
+                Color purple = new Color(0.5f, 0f, 0.5f, 1f); // RGBA values
+                lineRenderer.startColor = Color.blue;
+                lineRenderer.endColor = purple;
+                Vector3 currentEnd = Vector3.Lerp(start, end, progress);
+                lineRenderer.SetPosition(1, currentEnd);
+                yield return null;
+                progress += Time.deltaTime / duration;
+            }
+            lineRenderer.SetPosition(1, end);
         }
 
         private void CreateOrUpdateEntity(Message message)
@@ -103,7 +148,12 @@ namespace DefaultNamespace
 
                 GameObject newEntityObject = Instantiate(prefab, position, Quaternion.identity);
                 movementScript = newEntityObject.GetComponent<MovementScript>();
-                movementScript.objectText.text = message.SourceId;
+
+                if (movementScript.objectText != null)
+                {
+                    movementScript.objectText.text = message.SourceId;
+                }
+                //movementScript.objectText.text = message.SourceId;
 
                 if (movementScript == null)
                 {

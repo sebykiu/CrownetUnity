@@ -21,6 +21,10 @@ namespace Entities
 
         public void Update()
         {
+            if (_animator == null)
+            {
+                return;
+            }
             Vector3 previousPosition = transform.position;
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
