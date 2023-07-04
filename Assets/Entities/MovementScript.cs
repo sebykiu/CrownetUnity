@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 namespace Entities
@@ -10,6 +11,7 @@ namespace Entities
         public float speed;
         private Animator _animator;
         private static readonly int AnimationSpeed = Animator.StringToHash("Speed");
+        public TextMeshProUGUI objectText;
 
 
         void Start()
@@ -28,8 +30,8 @@ namespace Entities
             {
                 Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);
-            }          
-            
+            }
+
             float actualSpeed = Vector3.Distance(transform.position, previousPosition) / Time.deltaTime;
             if (Vector3.Distance(transform.position, targetPosition) < 0.01f)
             {
