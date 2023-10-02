@@ -52,8 +52,8 @@ namespace DefaultNamespace
             
             LineRenderer lineRenderer = Instantiate(lineRendererPrefab);
             lineRenderer.positionCount = 2;
-            lineRenderer.endWidth = 0.01f;
-            lineRenderer.startWidth = 0.5f;
+            lineRenderer.endWidth = 0.05f;
+            lineRenderer.startWidth = 2.5f;
             lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
             Vector3 sourcePos = src.transform.position;
             Vector3 targetPos = tar.transform.position;
@@ -74,14 +74,8 @@ namespace DefaultNamespace
             
           
             lineRenderer.SetPosition(0, sourcePos);
-
-            Color purple = new Color(0.5f, 0f, 0.5f, 1f); // RGBA values
-            lineRenderer.startColor = Color.blue;
-            lineRenderer.endColor = purple;
-            
-            
             // Start a coroutine that makes the arrow grow from start to end
-            StartCoroutine(GrowArrow(lineRenderer, sourcePos, targetPos, 0.5f));
+            StartCoroutine(GrowArrow(lineRenderer, sourcePos, targetPos, 0.5f, message));
 
             // Set the color to purple
 
@@ -92,15 +86,29 @@ namespace DefaultNamespace
 
         }
 
-        IEnumerator GrowArrow(LineRenderer lineRenderer, Vector3 start, Vector3 end, float duration)
+        IEnumerator GrowArrow(LineRenderer lineRenderer, Vector3 start, Vector3 end, float duration, Message message)
         {
 
             float progress = 0;
             while (progress < 1)
             {
-                Color purple = new Color(0.5f, 0f, 0.5f, 1f); // RGBA values
-                lineRenderer.startColor = Color.blue;
-                lineRenderer.endColor = purple;
+                
+                if (_entities.Keys.First() == message.SourceId)
+                {
+                    lineRenderer.startColor = Color.blue;
+                    lineRenderer.endColor = Color.blue;
+                
+                }
+                if (_entities.Keys.First() == message.TargetId)
+                {
+                
+                    lineRenderer.startColor = Color.red;
+                    lineRenderer.endColor = Color.red;
+                
+                }
+                
+                
+                
                 Vector3 currentEnd = Vector3.Lerp(start, end, progress);
                 lineRenderer.SetPosition(1, currentEnd);
                 yield return null;
@@ -153,7 +161,6 @@ namespace DefaultNamespace
                 {
                     movementScript.objectText.text = message.SourceId;
                 }
-                //movementScript.objectText.text = message.SourceId;
 
                 if (movementScript == null)
                 {
