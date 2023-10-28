@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Network
 {
-    internal class NetworkController : MonoBehaviour
+    internal class NetworkScript : MonoBehaviour
     {
         // Instantiate in Unity
         //public  MobilityManager mobilityManager;

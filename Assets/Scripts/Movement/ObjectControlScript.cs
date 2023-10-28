@@ -1,15 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Entities;
 using Network;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace DefaultNamespace
+namespace Entities
 {
-    public class EntityManager : MonoBehaviour
+    public class ObjectControlScript : MonoBehaviour
 
     {
         public GameObject personPrefab;
@@ -18,13 +15,13 @@ namespace DefaultNamespace
         public LineRenderer lineRendererPrefab;
         private Dictionary<string, MovementScript> _entities = new Dictionary<string, MovementScript>();
 
-        private NetworkController _networkController;
+        private NetworkScript _networkScript;
 
 
         private void Awake()
         {
-            _networkController = FindObjectOfType<NetworkController>();
-            _networkController.OnMessageReceived += HandleMessageReceived;
+            _networkScript = FindObjectOfType<NetworkScript>();
+            _networkScript.OnMessageReceived += HandleMessageReceived;
         }
 
         private void HandleMessageReceived(Message message)
