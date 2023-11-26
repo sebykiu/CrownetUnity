@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
+using System.Globalization;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using TMPro;
 using UnityEngine;
 
 namespace Network
@@ -135,7 +136,6 @@ namespace Network
                     var response = Encoding.UTF8.GetString(messageBuffer, 0, received);
 
                     var message = JsonConvert.DeserializeObject<Message>(response);
-                    message.SimulationTime = mainThreadTime;
 
                     _mainThreadWorkQueue.Enqueue(() => { OnMessageReceived?.Invoke(message); });
                 }
@@ -165,7 +165,7 @@ public class Message
     public Coordinates Coordinates { get; set; }
     public string ObjectType { get; set; }
     
-    public float SimulationTime { get; set; }
+    public float SimTime { get; set; }
 }
 
 public class Coordinates
