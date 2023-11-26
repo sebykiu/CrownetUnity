@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Network;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,6 +14,8 @@ namespace Entities
         public GameObject vehiclePrefab;
         public GameObject stationaryPrefab;
         public LineRenderer lineRendererPrefab;
+        public TextMeshProUGUI simTimeText;
+
         private Dictionary<string, MovementScript> _entities = new Dictionary<string, MovementScript>();
 
         private NetworkScript _networkScript;
@@ -26,6 +29,7 @@ namespace Entities
 
         private void HandleMessageReceived(Message message)
         {
+            simTimeText.text = "Simulation Time: " + message.SimTime;
             if (message.ObjectType == "packet") CreatePacketArrow(message);
             else CreateOrUpdateEntity(message);
         }
